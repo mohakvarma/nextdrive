@@ -1,29 +1,101 @@
-# Create T3 App
+# NextDrive
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+A modern, refined cloud storage platform.
 
-## What's next? How do I make an app with this?
+## Features
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- 🎨 Modern and polished user interface
+- 🌓 Light and dark mode support
+- 📁 Intuitive file and folder management
+- 🔍 Quick search functionality
+- 📱 Responsive design for all devices
+- 🔒 Secure authentication
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Tech Stack
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+This project leverages:
 
-## Learn More
+- [Next.js](https://nextjs.org) - React framework for production
+- [TypeScript](https://www.typescriptlang.org) - Type safety
+- [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework
+- [NextAuth.js](https://next-auth.js.org) - Authentication
+- [Prisma](https://prisma.io) - Database ORM
+- [Drizzle](https://orm.drizzle.team) - TypeScript ORM
+- [tRPC](https://trpc.io) - End-to-end typesafe APIs
+- [shadcn/ui](https://ui.shadcn.com) - Re-usable UI components
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Getting Started
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/nextdrive.git
+```
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+2. Install dependencies:
+```bash
+pnpm install
+```
 
-## How do I deploy this?
+3. Create a `.env` file based on `.env.example`:
+```bash
+cp .env.example .env
+```
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+4. Set up your database and update the connection string in `.env`
+
+5. Run database migrations:
+```bash
+pnpm prisma migrate dev
+```
+
+6. Start the development server:
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Project Structure
+
+```
+nextdrive/
+├── src/
+│   ├── components/     # Reusable UI components
+│   ├── pages/         # Next.js pages
+│   ├── server/        # API routes and procedures
+│   ├── styles/        # Global styles and Tailwind config
+│   └── utils/         # Utility functions and helpers
+├── prisma/            # Database schema and migrations
+└── public/           # Static files
+```
+
+## Development
+
+### Commands
+
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
+- `pnpm format` - Format code with Prettier
+
+## Deployment
+
+This project can be deployed on any platform that supports Next.js applications:
+
+- [Vercel](https://vercel.com/docs/frameworks/nextjs)
+- [Netlify](https://docs.netlify.com/frameworks/next-js/overview/)
+- [Docker](https://github.com/vercel/next.js/tree/canary/examples/with-docker)
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [shadcn/ui](https://ui.shadcn.com) - For beautiful UI components
+- [Lucide Icons](https://lucide.dev) - For the icon set
