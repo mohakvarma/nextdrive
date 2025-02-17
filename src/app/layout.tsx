@@ -11,21 +11,34 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Drive Clone",
-  description: "A modern, refined dark mode Drive clone built with Next.js",
+  title: "NextDrive - Cloud Storage Simplified",
+  description: "A modern, refined cloud storage platform built with Next.js",
   authors: [{ name: "Your Name" }],
-  viewport: "width=device-width, initial-scale=1",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" }
-  ]
+  ],
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "NextDrive",
+  },
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable}`}>
-      <body className="bg-background font-sans text-foreground antialiased">
-        {children}
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+      <body className="min-h-full bg-background font-sans text-foreground selection:bg-primary/10">
+        <div className="flex min-h-screen flex-col">
+          {children}
+        </div>
       </body>
     </html>
   )
