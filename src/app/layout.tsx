@@ -11,9 +11,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "NextDrive - Cloud Storage Simplified",
-  description: "A modern, refined cloud storage platform built with Next.js",
-  authors: [{ name: "Your Name" }],
+  title: "FULU Foundation - Fighting for Digital Ownership Rights",
+  description: "Restoring freedom, autonomy, and real ownership in a digital-first world",
+  authors: [{ name: "Mohak Varma" }],
   viewport: {
     width: "device-width",
     initialScale: 1,
