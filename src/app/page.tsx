@@ -1,56 +1,52 @@
 "use client"
 
-import { useState } from "react"
-import { Header } from "~/components/Header"
-import { Breadcrumbs } from "~/components/Breadcrumbs"
-import { FileList } from "~/components/FileList"
-import { type FileItem, mockData } from "~/lib/types"
+import { useRef, useEffect, useState } from "react"
+import { useScroll, useTransform } from "framer-motion"
+import Navigation from "~/components/home/Navigation"
+import HeroSection from "~/components/home/HeroSection"
+import MissionSection from "~/components/home/MissionSection"
+import ChallengeSection from "~/components/home/ChallengeSection"
+import ApproachSection from "~/components/home/ApproachSection"
+import FoundationSection from "~/components/home/FoundationSection"
+import JoinMovementSection from "~/components/home/JoinMovementSection"
+import Footer from "~/components/home/Footer"
 
-export default function GoogleDriveClone() {
-  const [currentFolder, setCurrentFolder] = useState<FileItem[]>(mockData)
-  const [breadcrumbs, setBreadcrumbs] = useState<FileItem[]>([])
+export default function HomePage() {
+  const containerRef = useRef(null)
+  const [isScrolled, setIsScrolled] = useState(false)
 
-  const handleFolderClick = (folder: FileItem) => {
-    if (folder.type !== "folder") return
-    setCurrentFolder(folder.children ?? [])
-    setBreadcrumbs([...breadcrumbs, folder])
-  }
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  })
 
-  const handleBreadcrumbClick = (index: number) => {
-    if (index === -1) {
-      setCurrentFolder(mockData)
-      setBreadcrumbs([])
-      return
+  const y = useTransform(scrollYProgress, [0, 1], [0, -50])
+
+  // Track scroll position for header styling
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroHeight = window.innerHeight * 0.8
+      setIsScrolled(window.scrollY > heroHeight)
     }
 
-    const newBreadcrumbs = breadcrumbs.slice(0, index + 1)
-    const lastFolder = newBreadcrumbs[newBreadcrumbs.length - 1]
-    setCurrentFolder(lastFolder?.children ?? [])
-    setBreadcrumbs(newBreadcrumbs)
-  }
-
-  const handleItemClick = (item: FileItem) => {
-    if (item.type === "folder") {
-      handleFolderClick(item)
-    } else {
-      window.open(`#file-${item.id}`, "_blank")
-    }
-  }
-
-  const handleUpload = () => {
-    // TODO: Implement file upload functionality
-    alert("Upload functionality would be implemented here")
-  }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Header onUpload={handleUpload} />
-      <main className="flex-1 overflow-hidden">
-        <div className="container mx-auto flex h-full flex-col gap-4 p-4">
-          <Breadcrumbs items={breadcrumbs} onNavigate={handleBreadcrumbClick} />
-          <FileList items={currentFolder} onItemClick={handleItemClick} />
+    <div className="min-h-screen bg-white overflow-hidden" ref={containerRef}>
+      <Navigation isScrolled={isScrolled} />
+      <HeroSection parallaxY={y} />
+      <div className="px-4 lg:px-8 mt-24">
+        <div className="space-y-0">
+          <MissionSection />
+          <ChallengeSection />
+          <ApproachSection />
+          <FoundationSection />
         </div>
-      </main>
+      </div>
+      <JoinMovementSection />
+      <Footer />
     </div>
   )
 }
